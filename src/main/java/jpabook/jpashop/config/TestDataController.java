@@ -1,11 +1,11 @@
 package jpabook.jpashop.config;
 
-import jpabook.jpashop.domain.Address;
-import jpabook.jpashop.domain.Member;
+import jpabook.jpashop.domain.*;
 import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.service.ItemService;
 import jpabook.jpashop.service.MemberService;
+import jpabook.jpashop.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +18,7 @@ public class TestDataController {
 
     private final MemberService memberService;
     private final ItemService itemService;
+    private final OrderService orderService;
 
     @PostConstruct
     @Transactional
@@ -63,6 +64,9 @@ public class TestDataController {
 
         itemService.saveItem(book);
         itemService.saveItem(book2);
+
+        orderService.order(member1.getId(), book.getId(), 1);
+
     }
 
 
